@@ -5,7 +5,7 @@ from pathlib import Path
 from qualifier.utils import fileio
 
 # Import Calculators
-from qualifier.utils import calculators
+from Qualifier.utils import calculators
 
 # Import Filters
 from qualifier.filters import credit_score
@@ -14,6 +14,12 @@ from qualifier.filters import loan_to_value
 from qualifier.filters import max_loan_size
 
 def test_save_csv():
+    csvpath = Path('../data/qualifying_loans.csv')
+    bank_data=[]
+    header=[]
+    fileio.save_csv(csvpath,bank_data,header)
+    assert csvpath.exist()==True
+
     # @TODO: Your code here!
     # Use Path from pathlib to output the test csv to ./data/output/qualifying_loans.csv
 

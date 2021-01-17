@@ -25,11 +25,12 @@ from qualifier.filters.debt_to_income import filter_debt_to_income
 from qualifier.filters.loan_to_value import filter_loan_to_value
 
 def save_csv(qualifying_loans):
-    output_path=Path("qualifying_loans.csv")
+    output_path=Path("../data/qualifying_loans.csv")
     with open(output_path, "w", newline="") as csvfile:
         csvwriter= csv.writer(csvfile)
-        for i in qualifying_loans:
-            csvwriter.writerow(value.values())
+        for list in qualifying_loans:
+            for loans in list:
+                csvwriter.csvwriterow(loans)
 
 
 def load_bank_data():
@@ -118,8 +119,11 @@ def save_qualifying_loans(qualifying_loans):
     """
     # @TODO: Complete the usability dialog for savings the CSV Files.
     # YOUR CODE HERE!
-    
-
+    confirmation= questionary.confirm("Would you like to save your qualifying loans?").ask()
+    if confirmation == True:
+        save_csv(qualifying_loans)
+    else:
+        sys.exit("Your qualifying loans will not be saved.")
 
 def run():
     """The main function for running the script."""
